@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TProductMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.TProduct">
+    <!--@mbg.generated-->
+    <!--@Table t_product-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="sale_price" jdbcType="BIGINT" property="salePrice" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="sale_point" jdbcType="VARCHAR" property="salePoint" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="flag" jdbcType="BOOLEAN" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, price, sale_price, images, sale_point, type_id, type_name, flag
+  </sql>
+</mapper>

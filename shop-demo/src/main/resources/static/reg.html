@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<head>
+    <title>注册页</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <script type="text/javascript"
+            src="js/jquery-3.5.1.min.js">
+    </script>
+    <style>
+        input::-webkit-input-placeholder {
+            color: white;
+        }
+
+        input::-moz-placeholder {
+            /* mozilla Firefox 19+ */
+            color: white;
+        }
+
+        input:-moz-placeholder {
+            /* mozilla Firefox 4 to 18 */
+            color: white;
+        }
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: white;
+        }
+
+        /*给进度条君添加一些样式*/
+
+        .progress {
+            width: 400px;
+            height: 10px;
+            border-radius: 10px;
+            margin: 10px 0px;
+            overflow: hidden;
+        }
+
+        .progress > div {
+            width: 0px;
+            height: 100px;
+            background-color: yellowgreen;
+            transition: all .3s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+<form action="addUser.do" method="POST">
+    <div id="login-box">
+        <div class="form">
+            <div class="item">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <span style="color: white; font-size: large; ">账号:</span></font><input type="text" name="name" id="name"
+                                                                                       placeholder="请输入账号"
+                                                                                       onblur="checkUserName()"/>
+                <div id="checkNameMsg"></div><!--检查信息-->
+                <div id="checkMultiName"></div>
+                <br>
+            </div>
+
+            <div class="item">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <span style="color: white; font-size: large; ">密码:</span><input type="password" name="pwd" id="pwd"
+                                                                                placeholder="请输入密码"
+                                                                                onblur="checkPwd()"/>
+                <div id="checkPwdMsg"></div>
+                <br>
+            </div>
+
+            <div class="item">
+                <i class="fa fa-nick" aria-hidden="true"></i>
+                <span style="color: white; font-size: large; ">昵称:</span><input type="text" name="nickname"
+                                                                                id="nickname"
+                                                                                placeholder="请输入昵称"
+                                                                                onblur="checkNickName()"><br>
+                <div id="checkNickMsg"></div>
+            </div>
+
+            <div class="item">
+                <i class="fa fa-nick" aria-hidden="true"></i>
+                <span style="color: white; font-size: large; ">头像:</span><input type="file" id="upFile" value="选择文件"/>
+                <a href="javascript:void(0)" id="uploadFile" onclick="loadPic()">立即上传</a>
+                <br>
+                <div id="divimg" style="width: 100px;height: 150px">
+                    <img id="img" style="width: 140px;height: 180px;" alt="您还未上传图片"/>
+                </div>
+                <br>
+                <div class="progress">
+                    <div>
+                    </div>
+                </div>
+                <div id="divNum"></div>
+            </div>
+
+            <button type="submit">注册</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+
+    function checkUserName() {
+        var reg1 = /^[a-zA-Z]{5,10}$/;
+        var userName = $("#name").val();
+        if (!reg1.test(userName)) {
+            $("#checkNameMsg").html("<span style='color: red; '>输入5-10个以字母开头的字串</span>");
+            return false;
+        }
+        $("#checkNameMsg").html("");
+        $.ajax({
+            url: "checkUserName.do",
+            type: "post",
+            /*  dataType: "json",*/
+            data: userName,
+            contentType: "text/html;charset=UTF-8",
+            success: function (data) {
+                if (data =="error:Repeated") {
+                    $("#checkMultiName").html("<span style='color :red'>该账号已被注册</span>");
+
+                    return false;
+                } else {
+                    $("#checkMultiName").html("<span style='color :green'>该账号可用</span>");
+                    return true;
+                }
+            }
+        });
+        // $("#checkNameMsg").html = ("<font style='color :green'>OK</font>");
+    }
+
+    function checkPwd() {
+        var reg1 = /^(\w){6,10}$/;
+        var userPwd = $("#pwd").val();
+
+        if (!reg1.test(userPwd)) {
+            $("#checkPwdMsg").html("<font color ='red'>只能输入6-10个字母、数字、下划线</font>");
+            return false;
+        }
+
+        $("#checkPwdMsg").html("<font style='color :green'>OK</font>");
+    }
+
+    function checkNickName() {
+        if ($("#nickname").val().length == 0) {
+            $("#checkNickMsg").html("<span style='color :red'>请输入昵称</span>");
+            return false;
+        }
+        $("#checkNickMsg").html("<span style='color :green'>OK</span>");
+    }
+
+    function loadPic() {
+
+        var photoFile = $("#upFile")[0].files[0];
+
+        // 将文件传到这个对象中
+        var formData = new FormData();
+
+        formData.append("headerPicture", photoFile);
+
+        $.ajax({
+                url: "/fileUpload2.do",
+                data: formData,//传送的数据
+                type: "post",
+                processData: false,//告诉浏览器发送的是一个对象   请求数据
+                contentType: false,//告诉浏览器 请求数据的类型 二进制类型
+                // dataType: "json",
+                success: function (data) {//接收返回来的数据并修改img标签里的内容
+                    //console.log(data);
+                    alert(data.msg);
+                    $("#img").attr("src", data.newFileName);
+                },
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function (e) {
+                        console.log(e);
+                        var progressRate = (e.loaded / e.total) * 100 + '%';
+                        if (photoFile != null) {
+                            $("#divNum").text(progressRate);
+                        }
+                        if (photoFile != null) {
+                            $('.progress > div').css('width', progressRate);
+                        }
+                    })
+                    return xhr;
+                }
+            }
+        );
+    }
+</script>
+
+
+</body>
+
+<footer>
+    <div id="message-box">Hello, I'm CodeM!</div>
+</footer>
+
+</html>
