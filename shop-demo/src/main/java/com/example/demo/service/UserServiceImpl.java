@@ -13,7 +13,7 @@ import java.util.List;
  * 2022/11/22
  */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private TUserMapper userMapper;
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 //    public void deleteById(Integer id) {
 //        userMapper.deleteById(id);
 //    }
-//
+
     @Override
     public List<TUser> getUsers() {
         return userMapper.selectList();
@@ -48,9 +48,14 @@ public class UserServiceImpl implements IUserService {
 //    public String login(TUser user) {
 //        return "login成功";
 //    }
-//
+
     @Override
     public ResultBean login(TUser user) {
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("service："+user.getName());
         TUser currentUser = userMapper.selectByName(user.getName());
         if (currentUser!=null){
@@ -59,10 +64,14 @@ public class UserServiceImpl implements IUserService {
                 //TODO    用JWT生成token
                 //TODO     将token存入redis中
                 //TODO     返回redis的key  username:UUID
+                System.out.println("成功");
                 return new ResultBean("200","username:UUID");
 
             }
+            System.out.println("失敗1");
+            return new ResultBean("400","账号或密码错误");
         }
+        System.out.println("失敗1");
         return new ResultBean("400","账号或密码错误");
     }
 

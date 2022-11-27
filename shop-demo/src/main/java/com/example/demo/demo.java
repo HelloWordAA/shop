@@ -45,4 +45,8 @@ public class demo {
 //        System.out.println("进入删除方法:"+user.getName());
 //        userServiceImpl.deleteById(user.getId());
 //    }
+
+    public static void main(String[] args) {
+
+    }
 }

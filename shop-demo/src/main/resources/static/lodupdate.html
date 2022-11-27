@@ -2,61 +2,12 @@
 <html lang="en">
 <head>
     <title>Title</title>
-    <style>
-        #playerTable {
-            width: 50%;
-            border: 3px solid cadetblue;
-            margin: 0px auto;
-            text-align: center;
-        }
 
-        #playerTable th, td {
-            border: 1px solid gray;
-        }
-
-        #playerTable img {
-            width: 100px;
-            height: 100px;
-        }
-    </style>
-    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
-    <script>
-        // 进入这个页面一上来就加载所有信息
-        $(function () {
-            $.ajax({
-                type: "post",
-                url: "getAllUser",/*获得所有信息*/
-                success: function (users) {
-                    $.each(users, function (i, e) {
-                        $("#playerTable").append('<tr>\n' +
-                            '        <td>' + e.id + '</td>\n' +
-                            '        <td>' + e.name + '</td>\n' +
-                            '        <td>' + e.pwd + '</td>\n' +
-                            '        <td>' + e.nickname + '</td>\n' +
-                            '        <td>\n' +
-                            '            <img src="http://192.168.1.2:8090/loadPic/' + e.picname + '" alt="" src>\n' +
-                            '        </td>\n' +
-                            '        <td>\n' +/*点击下载跳转链接,使得文件发送到用户端*/
-                            '            <a href="fileDownload.do?picname='+e.picname+'&filetype='+e.filetype+'">下载</a>\n' +
-                            '        </td>\n' +
-                            '    </tr>')
-                    })
-                }
-            })
-        })
-    </script>
 </head>
 <body>
-<table id="playerTable" cellspacing="0xp" cellpadding="0px">
-    <tr>
-        <th>编号</th>
-        <th>账号</th>
-        <th>密码</th>
-        <th>昵称</th>
-        <th>头像</th>
-        <th>下载</th>
-    </tr>
-
-</table>
+<form method="post" action="/common/upload" enctype="multipart/form-data">
+    <input name="myFile" type="file"  />
+    <input type="submit" value="提交" />
+</form>
 </body>
 </html>

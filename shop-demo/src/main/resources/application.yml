@@ -9,6 +9,11 @@ spring:
     password: 123
   application:
     name: hh-demo
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-requeest-size: -1
+tempFilePath: F:/temp/
 eureka:
   client:
     service-url:
@@ -25,3 +30,6 @@ eureka:
 ribbon:
   eureka:
     enabled: true
+fegin:
+  hystrix:
+    enable: true
