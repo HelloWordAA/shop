@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.MyAspect.MyLog;
+import com.example.demo.config.LoginDTO;
 import com.example.entity.TUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,8 @@ public class UserFeginController {
         return list.toString();
     }
     @RequestMapping("login")
-    @MyLog(desc = "login start")
-    public ResultBean login(@RequestBody TUser user,
+    @MyLog(desc = "开始登陆")
+    public ResultBean login(@RequestBody LoginDTO user,
                             String referer,
                             HttpServletRequest request,
                             HttpServletResponse response){

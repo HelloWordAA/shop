@@ -46,7 +46,5 @@ public class demo {
 //        userServiceImpl.deleteById(user.getId());
 //    }
 
-    public static void main(String[] args) {
 
-    }
 }

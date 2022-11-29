@@ -1,12 +1,16 @@
 package com.example.demo.service;
 
 
+import com.example.demo.Task.MyAsyncTask;
+import com.example.demo.config.LoginDTO;
 import com.example.entity.TUser;
 import com.example.mapper.TUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * yzw
@@ -16,6 +20,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private TUserMapper userMapper;
+    @Autowired
+    private MyAsyncTask myAsyncTask;
 
 
 
@@ -50,13 +56,21 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public ResultBean login(TUser user) {
+    public ResultBean login(LoginDTO user) {
 //        try {
 //            Thread.sleep(10000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
         System.out.println("service："+user.getName());
+        Future<String> stringFuture = myAsyncTask.myTask();
+        try {
+            System.out.println("获取异步信息："+stringFuture.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         TUser currentUser = userMapper.selectByName(user.getName());
         if (currentUser!=null){
             if (currentUser.getPassword().equals(user.getPassword())){

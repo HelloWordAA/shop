@@ -9,10 +9,18 @@ spring:
     password: 123
   application:
     name: hh-demo
-  servlet:
-    multipart:
-      max-file-size: -1
-      max-requeest-size: -1
+  task:
+    execution:
+      pool:
+        core-size: 3
+        max-size: 6
+        keep-alive: 3s
+        queue-capacity: 1000
+#        allow-core-thread-timeout: name
+#  servlet:
+#    multipart:
+#      max-file-size: -1
+#      max-requeest-size: -1
 tempFilePath: F:/temp/
 eureka:
   client:

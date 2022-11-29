@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/fileCss.css" type="text/css"/>
+    <title>登录</title>
+<!--    <link rel="stylesheet" href="css/fileCss.css" type="text/css"/>-->
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 </head>
 <body>
-<div class="main">
-    <h2>欢迎访问学生管理系统</h2>
-    <form action="login.do" method="post" class="form">
-        账号: <input type="text", name="name"/></br>
-        密码: <input type="password", name="pwd"/></br>
-        <button type="submit">登录</button><br> <button><a href="registPage.html"><span style="color: white; ">注册</span> </a></button><br>
-    </form>
-</div>
+    <div>
+        <form id = "f1" onsubmit="return false" action="##" >
+<!--            id:<input type="hidden" name="id">-->
+            账号：<input type="text" id="name" name="name"/></br>
+            密码：<input type="password" id="password" name="password"/></br>
+<!--            电话：<input type="text" name="phone"></br>-->
+<!--            邮箱：<input type="email" name="email"></br>-->
+<!--            男<input type="checkbox" name="gender" checked>-->
+<!--            女<input type="checkbox" name="gender" ></br>-->
+<!--            年龄:<input type="number" name="age"></br>-->
+            <input type="button" value="提交" onclick="login()">
+        </form>
+        <script type="text/javascript">
+            function login(){
+                var params = {"name": $("#name").val(),"password": $("#password").val()}
+                $.ajax({
+                    url: "http://localhost:8585/home/login",
+                    type: "post",
+                    contentType:"application/json;charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(params),
+                    //JSON.stringify(obj)这个函数可以把json对象转换为json字符串
+                    // data: JSON.stringify({"name": $("#name").val(),"password": $("#password").val()}),
+                    //后端如果是@RequestBody接收需要先转为字符串
+                    // data: {"name": $("#name").val(),"password": $("#password").val()},
+                    success: function (result){
+                        if (result.statusCode == 200) {
+                            alert("成功跳转");
+                            window.location.href = "http://localhost:9999/index.html";
+                        } else {
+                            alert("登錄失敗");
+                            window.location.href = "http://localhost:9999/fail.html";
+                        }
+                    },
+                    error: function (result){
+
+                    }
+                });
+            }
+
+            // $(function(){
+            //     $('#f1').on('submit',function (e) {
+            //         e.preventDefault()//阻止表单的默认行为
+            //         var formdata = $('#f1').serialize() //快速获取表单中的数据
+            //
+            //         $.ajax({
+            //             url: "http://localhost:8585/home/login",
+            //             type: "post",
+            //             dataType: "json",
+            //             data: {formdata},
+            //             success: function (result){
+            //
+            //             }
+            //     })
+            //
+            //     })
+            // })
+
+        </script>
+    </div>
 </body>
 </html>

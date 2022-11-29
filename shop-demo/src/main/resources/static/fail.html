@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>失敗</title>
+</head>
+<body>
+<div id="one">5秒后跳转....</div>
+
+<script>
+    num = 5
+    t1 = setInterval(function() {
+        num -=1;
+        if (num == 0 ){
+            clearInterval(t1)
+            window.location.href = "/login.html";
+        }
+        document.getElementById('one').innerHTML=num+'秒后跳转...'
+    },1000)
+    // setTimeout(function () {
+    //     window.location.href = "= http://localhost:9999/login.html";
+    // },5000)
+</script>
+</body>
+</html>

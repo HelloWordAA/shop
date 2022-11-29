@@ -1,14 +1,13 @@
 package com.sso.controller;
 
+import com.example.demo.config.LoginDTO;
 import com.example.demo.service.IUserService;
 import com.example.demo.service.ResultBean;
-import com.example.entity.TUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +22,7 @@ public class HomeController {
     private IUserService userService;
 
     @RequestMapping("test")
+    @ResponseBody
     public String test(){
 //        List<TUser> list = userServiceImpl.getUsers();
 //        User user = userServiceImpl.getUser(100);
@@ -39,20 +39,27 @@ public class HomeController {
     }
 
     @RequestMapping("login")
-    public ResultBean login(@RequestBody TUser user,
+    @CrossOrigin(origins = "*")
+    public ResultBean login(@RequestBody LoginDTO user,
                             String referer,
                             HttpServletRequest request,
                             HttpServletResponse response){
+//        response.addHeader("Access-Control-Allow-Origin","*");
         System.out.println("开始登陆:"+user.getName());
         ResultBean resultBean = userService.login(user);
-//        if ("200".equals(resultBean.getData())){
-//            Cookie cookie = new Cookie("user:token",resultBean.getData().toString());
-//            cookie.setPath("/");
-//            cookie.setHttpOnly(true);
-//            response.addCookie(cookie);
-//            return new ResultBean("200","登陆成功");
-//        }
-//        return new ResultBean("400","登录失败");
-        return resultBean;
+        if ("200".equals(resultBean.getStatusCode())){
+            Cookie cookie = new Cookie("userToken",resultBean.getData().toString());
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(1000*60);
+            response.addCookie(cookie);
+            return new ResultBean("200",resultBean.getData());
+//            if (referer ==null || "".equals(referer)){
+//                return "redirect:http://localhost:9999/index";
+//            }
+//            return referer;
+        }
+//        return "reg";
+        return new ResultBean("400","失敗");
     }
 }
