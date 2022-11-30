@@ -2,10 +2,10 @@ package com.sso.controller;
 
 import com.example.demo.config.LoginDTO;
 import com.example.demo.service.IUserService;
-import com.example.demo.service.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pojo.ResultBean;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

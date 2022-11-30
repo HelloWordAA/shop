@@ -7,6 +7,7 @@ import com.example.entity.TUser;
 import com.example.mapper.TUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.ResultBean;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
