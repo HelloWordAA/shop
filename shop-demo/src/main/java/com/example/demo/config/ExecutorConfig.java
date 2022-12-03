@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * yzw
  * 2022/11/27
- * 线程配置
+ * 线程池配置
  */
 @Component
 @Data

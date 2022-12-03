@@ -1,13 +1,17 @@
-package com.example.demo.config;
+package com.example.demo.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * yzw
  * 2022/11/29
  */
 @Data
-public class LoginDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class LoginVO implements Cloneable {
     /**
      * 用户名称
      */
@@ -38,4 +42,8 @@ public class LoginDTO {
 //    private Integer gender;
 
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

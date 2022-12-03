@@ -1,6 +1,6 @@
 package com.sso.controller;
 
-import com.example.demo.config.LoginDTO;
+import com.example.demo.pojo.LoginVO;
 import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -40,7 +40,7 @@ public class HomeController {
 
     @RequestMapping("login")
     @CrossOrigin(origins = "*")
-    public ResultBean login(@RequestBody LoginDTO user,
+    public ResultBean login(@RequestBody LoginVO user,
                             String referer,
                             HttpServletRequest request,
                             HttpServletResponse response){

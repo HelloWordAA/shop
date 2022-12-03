@@ -1,6 +1,13 @@
 
 server:
-  port: 9999
+  port: 9998
+  ssl:
+    enabled: true
+    key-store: classpath:springboot.keystore
+    key-store-type: PKCS12
+    key-alias: springboot-https
+    key-password: 123456
+    key-store-password: 123456
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,7 +34,8 @@ eureka:
     service-url:
       defaultZone: http://localhost:9000/eureka/
     registry-fetch-interval-seconds: 30
-    fetch-registry: true
+    fetch-registry: false
+    register-with-eureka: false
   instance:
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90

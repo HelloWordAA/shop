@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.config.LoginDTO;
+import com.example.demo.pojo.LoginVO;
 import com.example.entity.TUser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +21,5 @@ public interface UserService {
 
     @RequestMapping(value = "/user/login",method = RequestMethod.POST)
         //@RequestBody不写可以默认
-    ResultBean login(@RequestBody LoginDTO user);
+    ResultBean login(@RequestBody LoginVO user);
 }

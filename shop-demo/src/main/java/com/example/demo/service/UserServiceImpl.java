@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.Task.MyAsyncTask;
-import com.example.demo.config.LoginDTO;
+import com.example.demo.pojo.LoginVO;
 import com.example.entity.TUser;
 import com.example.mapper.TUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public ResultBean login(LoginDTO user) {
+    public ResultBean login(LoginVO user) {
 //        try {
 //            Thread.sleep(10000);
 //        } catch (InterruptedException e) {
