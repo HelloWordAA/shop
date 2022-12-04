@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.MyAspect.MyLog;
 import com.example.demo.pojo.LoginVO;
 import com.example.entity.TUser;
+import enumEntity.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,21 +36,23 @@ public class UserFeginController {
     @RequestMapping("login")
     @MyLog(desc = "开始登陆")
     public ResultBean login(@RequestBody LoginVO user,
-                            String referer,
-                            HttpServletRequest request,
-                            HttpServletResponse response){
+                             String referer,
+                             HttpServletRequest request,
+                             HttpServletResponse response){
         System.out.println("开始登陆:"+user.getName());
         ResultBean resultBean = userServiceImpl.login(user);
         System.out.println("返回"+resultBean.getData());
-        if ("200".equals(resultBean.getStatusCode())){
+        if ("200".equals(resultBean.getCode())){
 
 //            Cookie cookie = new Cookie("user:token",resultBean.getData().toString());
 //            cookie.setPath("/");
 //            cookie.setHttpOnly(true);
 //            response.addCookie(cookie);
             System.out.println("成功:"+user.getName());
-            return new ResultBean("200","登陆成功");
+            return new ResultBean(ResultCode.SUCCESS,resultBean.getData());
         }
-        return new ResultBean("400","登录失败");
+
+        return new ResultBean(ResultCode.USER_LOGIN_ERROR);
+//        throw new UserException();
     }
 }

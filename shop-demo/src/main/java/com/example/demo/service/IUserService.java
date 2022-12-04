@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pojo.ResultBean;
+import pojo.ResultBean1;
 
 import java.util.List;
 
@@ -34,5 +34,5 @@ public interface IUserService {
 
         @RequestMapping(value = "/user/login",method = RequestMethod.POST)
         //@RequestBody不写可以默认
-        ResultBean login(@RequestBody LoginVO user);
+        ResultBean1 login(@RequestBody LoginVO user);
 }

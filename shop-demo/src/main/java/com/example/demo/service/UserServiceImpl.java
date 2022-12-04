@@ -5,6 +5,7 @@ import com.example.demo.Task.MyAsyncTask;
 import com.example.demo.pojo.LoginVO;
 import com.example.entity.TUser;
 import com.example.mapper.TUserMapper;
+import enumEntity.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.ResultBean;
@@ -80,14 +81,18 @@ public class UserServiceImpl implements UserService {
                 //TODO     将token存入redis中
                 //TODO     返回redis的key  username:UUID
                 System.out.println("成功");
-                return new ResultBean("200","username:UUID");
-
+//                return new ResultBean("200","username:UUID");
+                String s = "username:UUID";
+                return ResultBean.create(ResultCode.SUCCESS,s);
             }
             System.out.println("失敗1");
-            return new ResultBean("400","账号或密码错误");
+//            return new ResultBean("400","账号或密码错误");
+//            throw new UserException();
+            return new ResultBean(ResultCode.USER_LOGIN_ERROR);
         }
-        System.out.println("失敗1");
-        return new ResultBean("400","账号或密码错误");
+        return new ResultBean(ResultCode.USER_LOGIN_ERROR);
+//        System.out.println("失敗1");
+//        return new ResultBean("400","账号或密码错误");
     }
 
 
