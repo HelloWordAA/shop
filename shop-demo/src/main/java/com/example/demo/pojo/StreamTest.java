@@ -1,6 +1,6 @@
 package com.example.demo.pojo;
 
-import java.lang.reflect.InvocationTargetException;
+import pojo.Test;
 
 /**
  * yzw
@@ -25,33 +25,52 @@ public class StreamTest {
 
 //        stream.forEach(System.out::println);
 //        System.out.println(isPalindrome(0));
-        try {
-            //创建对象的方式
-            //反射派发对象
-            LoginVO loginVO = LoginVO.class.newInstance();
-            loginVO.getName();
-            System.out.println(loginVO.getName());
-            //克隆对象
-            LoginVO login2 = new LoginVO();
-            login2.clone();
-            //反射  构造方法创建
-            LoginVO login3 = LoginVO.class.getConstructor().newInstance();
-            //反射   类的全限定名创建
-            LoginVO login4 = (LoginVO) Class.forName("com.example.demo.pojo.LoginVO").newInstance();
+//        try {
+//            //创建对象的方式
+//            //反射派发对象
+//            LoginVO loginVO = LoginVO.class.newInstance();
+//            loginVO.getName();
+//            System.out.println(loginVO.getName());
+//            //克隆对象
+//            LoginVO login2 = new LoginVO();
+//            login2.clone();
+//            //反射  构造方法创建
+//            LoginVO login3 = LoginVO.class.getConstructor().newInstance();
+//            //反射   类的全限定名创建
+//            LoginVO login4 = (LoginVO) Class.forName("com.example.demo.pojo.LoginVO").newInstance();
+//
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (CloneNotSupportedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        final String s = "66";
+//        System.out.println(s);
+//        String s1 ="66a";
+//        System.out.println(s1);
+//        String s2 = s+"a";
+//        System.out.println(s2);
+//        System.out.println(s1==s2);
+//        System.out.println(s1.equals(s2));
+            Test t = new Test("haha");
+            Test t1 = new Test("haha");
+            String s = "haha";
+            String s1 = new String("haha");
+            String s2 = s1;
+        System.out.println(t1.equals(t));
+        System.out.println(s.equals(s1));
+        System.out.println(s.equals(s2));
+        System.out.println(s1.equals(s2));
 
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
     public static boolean isPalindrome(int x) {
         //如果是负数或者整数则不是回文数

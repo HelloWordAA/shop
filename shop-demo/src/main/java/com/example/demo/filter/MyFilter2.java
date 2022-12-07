@@ -1,5 +1,6 @@
 package com.example.demo.filter;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -10,6 +11,7 @@ import java.io.IOException;
  * yzw
  * 2022/12/4
  */
+@Order(1)//执行顺序，数字越小越先执行
 @Component      //注入spring容器
 @WebFilter(filterName = "myFilter2",urlPatterns = "/*")   //注册filter  定义filterName和过滤的url
 public class MyFilter2 implements Filter {

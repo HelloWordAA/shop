@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+  <script src="../js/jquery-3.2.1.js"></script>
+</head>
+<body>
+  <div>
+    <form>
+      <label for="username">账号：</label>
+      <input type="text" id="username" name="username"/><br/>
+      <label for="password">密码：</label>
+      <input type="password" id="password" name="password"/><br/>
+      <label for="captcha">验证码:</label>
+      <input type="text" id="captcha" name="captcha"/><br/>
+        <img src="" id="code" alt="" onclick="getImageCode()"><a href="#" onclick="getImageCode()">看不清，换一张</a>
+      <button type="button" id="login_button" name="submit" value="登录" onclick="login()" >登录</button>
+    </form>
+  </div>
+<script>
+//获取验证码
+  function getImageCode(){
+    var windowUrl = window.URL || window.webkitURL;//处理浏览器兼容性
+    var xhr = new XMLHttpRequest();
+    var url = "/home/getCaptcha";
+    xhr.open("GET",url,true);
+    xhr.responseType = "blob";
+    xhr.onload = function(){
+      if (this.status == 200){
+        var blob = this.response;
+        $("#code").attr("src",windowUrl.createObjectURL(blob));
+      }
+    }
+    xhr.send();
+  }
+function login(){
+    var params = {
+        "username":$("#username").val(),"password":$("#password").val(),"captcha":$("#captcha").val()
+    }
+    $.ajax({
+      url : "/home/login",
+      type: "post",
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(params),
+      success : function(result){
+        // if (result.code == 200){
+        //   window.location.href = "http:localhost:8585/templates/index.html"
+        // }else {
+        //   alert("登录失败");
+        //   window.location.href = "http://localhost:8585/templates/fail.html";
+        // }
+      }
+    })
+}
+  // function loadImg() {
+  //   document.getElementById("loadcode").src="接口地址&" + Math.random();
+  //   //Math.random()为了防止有缓存
+  // }
+
+</script>
+</body>
+</html>

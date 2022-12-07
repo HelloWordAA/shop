@@ -8,5 +8,5 @@ package base;
  */
 public abstract class BaseServiceImpl<T> implements IBaseService<T>{
     //子类实现抽象方法，注入具体的mapper
-    abstract IBaseDao<T> getBaseDao();
+    public abstract IBaseDao<T> getBaseDao();
 }

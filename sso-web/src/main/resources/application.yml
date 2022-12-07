@@ -3,6 +3,8 @@ eureka:
     service-url:
       defaultZone: http://localhost:9000/eureka/
     registry-fetch-interval-seconds: 30
+    fetch-registry: false
+    register-with-eureka: false
   instance:
     lease-renewal-interval-in-seconds: 30
     lease-expiration-duration-in-seconds: 90
@@ -14,5 +16,15 @@ spring:
     url: jdbc:mysql://localhost:3306/v13?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
     username: root
     password: 123
+  redis:
+    host: 192.168.1.149
+    port: 6379
+    password: root
+    database: 0
+#    connect-timeout: 3000
 server:
   port: 8585
+jwt:
+  secret: yzw123456           #证书公钥
+  expiration: 30        #过期时间
+  tokenHead: Bearer     #token前缀

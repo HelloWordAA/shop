@@ -1,4 +1,4 @@
-package com.example.demo.MyAspect;
+package com.example.demo.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -24,7 +24,7 @@ public class MyLogAspect {
     /**
      * 只要用到了MyLog这个注解的就是目标类
      */
-    @Pointcut("@annotation(com.example.demo.MyAspect.MyLog)")
+    @Pointcut("@annotation(com.example.demo.aspect.MyLog)")
     private void logPointCut(){}
 
     //如果方法返回成功，则将函数标记为在切入点覆盖的方法之前执行的通知

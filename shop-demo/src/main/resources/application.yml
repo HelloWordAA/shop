@@ -23,6 +23,12 @@ spring:
         max-size: 6
         keep-alive: 3s
         queue-capacity: 1000
+  redis:
+    host: 192.168.149
+    database: 0
+    port: 6379
+    password: root
+    connect-timeout: 3000   #毫秒
 #        allow-core-thread-timeout: name
 #  servlet:
 #    multipart:
@@ -49,3 +55,9 @@ ribbon:
 fegin:
   hystrix:
     enable: true
+#定时任务开关
+scheduling:
+  cronTaskSwitch:
+    enable: true
+  task2Switch:
+    enable: false

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.MyAspect.MyLog;
+import com.example.demo.aspect.MyLog;
 import com.example.demo.pojo.LoginVO;
 import com.example.entity.TUser;
 import enumEntity.ResultCode;

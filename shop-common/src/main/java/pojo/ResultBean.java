@@ -37,6 +37,9 @@ public class ResultBean<T>  {
     public static <T> ResultBean create(ResultCode resultCode, T data){
         return new ResultBean(resultCode,data);
     }
+    public static <T> ResultBean fail(ResultCode resultCode){
+        return new ResultBean(resultCode,null);
+    };
 
     
 

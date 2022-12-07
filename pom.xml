@@ -16,6 +16,7 @@
 		<module>shop-protal</module>
 		<module>shop-search</module>
 		<module>shop-seckill</module>
+		<module>shop-activiti</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

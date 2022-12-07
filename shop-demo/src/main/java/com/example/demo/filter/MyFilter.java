@@ -36,6 +36,7 @@ public class MyFilter implements Filter {
         System.out.println("处理中----->");
         //调用filter链中的下一个filter
         filterChain.doFilter(servletRequest,servletResponse);
+        System.out.println("过滤器处理->");
     }
 
     /**
@@ -44,6 +45,6 @@ public class MyFilter implements Filter {
      */
     @Override
     public void destroy() {
-        System.out.println("Filter后置");
+        System.out.println("Filter销毁");
     }
 }
